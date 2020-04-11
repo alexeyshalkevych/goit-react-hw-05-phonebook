@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import ContactFilter from '../ContactFilter/ContactFilter';
@@ -9,6 +9,7 @@ import {
   PhonebookContainer,
   PhonebookTitle,
   PhonebookSubTitle,
+  Notification,
 } from './Phonebook.styled';
 import 'react-toastify/dist/ReactToastify.css';
 import SlideTitle from '../../transition/popText.transition';
@@ -87,11 +88,13 @@ const Phonebook = () => {
       </SlideTitle>
       <ContactForm onAddContact={addContact} />
       <PhonebookSubTitle>Contacts</PhonebookSubTitle>
-      {contacts.length >= 2 && (
-        <ContactFilter value={filter} onChangeFilter={changeFilter} />
-      )}
+      <ContactFilter
+        value={filter}
+        onChangeFilter={changeFilter}
+        isFiltered={contacts.length >= 2}
+      />
       <ContactList items={filteredContacts} onDeleteContact={deleteContact} />
-      <ToastContainer autoClose={3000} />
+      <Notification autoClose={1500} />
     </PhonebookContainer>
   );
 };

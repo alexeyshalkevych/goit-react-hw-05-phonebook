@@ -18,10 +18,10 @@ export const DeleteButton = styled.button`
   display: block;
   padding: 5px 10px;
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.2;
   font-weight: 400;
-  color: #fff;
+  color: rgb(255, 255, 255);
   background-color: rgb(218, 1, 1);
   border: none;
   border-radius: 4px;

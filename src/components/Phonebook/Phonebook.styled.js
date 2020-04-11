@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 
 export const PhonebookContainer = styled.div`
   max-width: 400px;
@@ -23,4 +24,15 @@ export const PhonebookSubTitle = styled.h2`
   line-height: 1.2;
   font-weight: 900;
   color: rgb(0, 106, 177);
+`;
+
+export const Notification = styled(ToastContainer)`
+  top: -5px;
+  right: 37%;
+  padding: 6px 4px;
+  margin: 0;
+  width: 210px;
+  .Toastify__close-button {
+    display: none;
+  }
 `;

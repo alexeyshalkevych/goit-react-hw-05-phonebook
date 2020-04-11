@@ -12,18 +12,16 @@ const Contact = ({ item: { name, number }, onDeleteContact }) => (
     <ContactName>{name}</ContactName>
     <ContactNumber>{number}</ContactNumber>
     <DeleteButton type="button" onClick={onDeleteContact}>
-      delete
+      &#10006;
     </DeleteButton>
   </ContactContainer>
 );
 
 Contact.propTypes = {
-  item: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+  item: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 
