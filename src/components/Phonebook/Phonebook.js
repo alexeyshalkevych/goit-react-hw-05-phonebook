@@ -11,12 +11,16 @@ import {
   PhonebookSubTitle,
 } from './Phonebook.styled';
 import 'react-toastify/dist/ReactToastify.css';
+import SlideTitle from '../../transition/popText.transition';
 
 const Phonebook = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+  const [showTitle, setShowTitle] = useState(false);
 
   useEffect(() => {
+    setShowTitle(true);
+
     const persistedContacts = get('contacts');
 
     if (persistedContacts) {
@@ -78,7 +82,9 @@ const Phonebook = () => {
 
   return (
     <PhonebookContainer>
-      <PhonebookTitle>Phonebook</PhonebookTitle>
+      <SlideTitle in={showTitle}>
+        <PhonebookTitle>Phonebook</PhonebookTitle>
+      </SlideTitle>
       <ContactForm onAddContact={addContact} />
       <PhonebookSubTitle>Contacts</PhonebookSubTitle>
       {contacts.length >= 2 && (
