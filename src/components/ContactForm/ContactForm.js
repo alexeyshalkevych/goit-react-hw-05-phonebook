@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { FormContainer, Label, InputField, Button } from './ContactForm.styled';
 
+const initialState = {
+  name: '',
+  number: '',
+};
+
+const reducer = (state, { type, field, value }) => {
+  switch (type) {
+    case 'RESET':
+      return initialState;
+    case 'CHANGE_INPUT':
+      return {
+        ...state,
+        [field]: value,
+      };
+    default:
+      return state;
+  }
+};
+
 const ContactForm = ({ onAddContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { name, number } = state;
 
   const resetForm = () => {
-    setName('');
-    setNumber('');
+    dispatch({ type: 'RESET' });
   };
 
   const handleSubmit = e => {
@@ -19,6 +37,12 @@ const ContactForm = ({ onAddContact }) => {
     resetForm();
   };
 
+  const handleChange = e => {
+    const { name, value } = e.target;
+
+    dispatch({ type: 'CHANGE_INPUT', field: name, value });
+  };
+
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Label>
@@ -27,7 +51,7 @@ const ContactForm = ({ onAddContact }) => {
           type="text"
           name="name"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={handleChange}
           autoComplete="off"
         />
       </Label>
@@ -37,7 +61,7 @@ const ContactForm = ({ onAddContact }) => {
           type="text"
           name="number"
           value={number}
-          onChange={e => setNumber(e.target.value)}
+          onChange={handleChange}
           autoComplete="off"
         />
       </Label>
