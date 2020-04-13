@@ -1,32 +1,15 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { FormContainer, Label, InputField, Button } from './ContactForm.styled';
-
-const initialState = {
-  name: '',
-  number: '',
-};
-
-const reducer = (state, { type, field, value }) => {
-  switch (type) {
-    case 'RESET':
-      return initialState;
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        [field]: value,
-      };
-    default:
-      return state;
-  }
-};
+import { reducer, initialState } from './contactReducer';
+import { CHANGE_INPUT, RESET } from '../../types';
 
 const ContactForm = ({ onAddContact }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { name, number } = state;
 
   const resetForm = () => {
-    dispatch({ type: 'RESET' });
+    dispatch({ type: RESET });
   };
 
   const handleSubmit = e => {
@@ -40,7 +23,7 @@ const ContactForm = ({ onAddContact }) => {
   const handleChange = e => {
     const { name, value } = e.target;
 
-    dispatch({ type: 'CHANGE_INPUT', field: name, value });
+    dispatch({ type: CHANGE_INPUT, field: name, value });
   };
 
   return (

@@ -6,7 +6,7 @@ const filterContacts = (contacts, filter) =>
 const findContact = (contacts, contact) =>
   contacts.find(item => item.name === contact.name);
 
-const save = (key, value) => {
+const saveToLocaleStorage = (key, value) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
@@ -14,7 +14,7 @@ const save = (key, value) => {
   }
 };
 
-const get = key => {
+const getFromLocaleStorage = key => {
   try {
     const items = localStorage.getItem(key);
 
@@ -24,4 +24,9 @@ const get = key => {
   }
 };
 
-export { filterContacts, findContact, save, get };
+export {
+  filterContacts,
+  findContact,
+  saveToLocaleStorage,
+  getFromLocaleStorage,
+};

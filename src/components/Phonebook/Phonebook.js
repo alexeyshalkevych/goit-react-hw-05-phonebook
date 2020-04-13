@@ -4,7 +4,12 @@ import { toast } from 'react-toastify';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import ContactFilter from '../ContactFilter/ContactFilter';
-import { filterContacts, findContact, get, save } from '../../utils/helpers';
+import {
+  filterContacts,
+  findContact,
+  getFromLocaleStorage,
+  saveToLocaleStorage,
+} from '../../utils/helpers';
 import {
   PhonebookContainer,
   PhonebookTitle,
@@ -22,7 +27,7 @@ const Phonebook = () => {
   useEffect(() => {
     setShowTitle(true);
 
-    const persistedContacts = get('contacts');
+    const persistedContacts = getFromLocaleStorage('contacts');
 
     if (persistedContacts) {
       setContacts(persistedContacts);
@@ -30,7 +35,7 @@ const Phonebook = () => {
   }, []);
 
   useEffect(() => {
-    save('contacts', contacts);
+    saveToLocaleStorage('contacts', contacts);
   }, [contacts]);
 
   const changeFilter = e => {
